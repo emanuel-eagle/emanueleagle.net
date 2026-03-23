@@ -1,0 +1,13 @@
+{
+  "title": "Bird Photos",
+  "layout": "gallery",
+  "intro": "A collection of bird photos from the field. New photos added regularly.",
+  "photos": [
+    {
+      "src": "images/birds/example.jpg",
+      "caption": "A beautiful bird",
+      "species": "Example Species",
+      "date": "2026-03-01"
+    }
+  ]
+}

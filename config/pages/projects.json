@@ -1,0 +1,17 @@
+{
+  "title": "Projects",
+  "layout": "list",
+  "intro": "Here are some things I've been working on.",
+  "items": [
+    {
+      "name": "Project One",
+      "description": "A cool thing I built.",
+      "link": ""
+    },
+    {
+      "name": "Project Two",
+      "description": "Another cool thing I built.",
+      "link": ""
+    }
+  ]
+}
