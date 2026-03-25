@@ -30,9 +30,11 @@ jobs:
         working-directory: infra
         run: terraform init
 
-      - name: Force unlock state (temporary)
-        working-directory: infra
-        run: terraform force-unlock -force 37b6e4d6-db27-da82-ca06-33b9506b8ea3 || true
+      - name: Clear state lock (temporary)
+        run: |
+          aws dynamodb delete-item \
+            --table-name terraform-locks \
+            --key '{"LockID": {"S": "emanueleagle-terraform-state/site/terraform.tfstate"}}' || true
 
       - name: Terraform Apply
         working-directory: infra
