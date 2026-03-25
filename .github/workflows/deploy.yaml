@@ -30,6 +30,10 @@ jobs:
         working-directory: infra
         run: terraform init
 
+      - name: Force unlock state (temporary)
+        working-directory: infra
+        run: terraform force-unlock -force 5e73cc30-00f3-5b16-6609-d149b56148a1
+
       - name: Terraform Apply
         working-directory: infra
         run: terraform apply -auto-approve
