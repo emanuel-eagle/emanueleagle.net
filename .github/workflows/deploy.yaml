@@ -30,12 +30,9 @@ jobs:
         working-directory: infra
         run: terraform init
 
-      - name: Import existing resources (temporary)
+      - name: Force unlock state (temporary)
         working-directory: infra
-        run: |
-          terraform import aws_s3_bucket.site emanueleagle.net || true
-          terraform import aws_cloudfront_origin_access_control.site E8I2OKOWEMXSJ || true
-          terraform import aws_route53_zone.site Z057999439RPH4BVKB0A8 || true
+        run: terraform force-unlock -force b67a35ba-f87d-515d-1180-1899976e82b6
 
       - name: Terraform Apply
         working-directory: infra
