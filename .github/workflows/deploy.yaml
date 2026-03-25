@@ -32,7 +32,7 @@ jobs:
 
       - name: Force unlock state (temporary)
         working-directory: infra
-        run: terraform force-unlock -force b67a35ba-f87d-515d-1180-1899976e82b6
+        run: terraform force-unlock -force b67a35ba-f87d-515d-1180-1899976e82b6 || true
 
       - name: Terraform Apply
         working-directory: infra
