@@ -15,8 +15,25 @@ OUTPUT_DIR = "html"
 WATERMARK_TEXT = "© emanueleagle.net"
 
 
+DISPLAY_W, DISPLAY_H = 600, 300
+
+
+def crop_to_display(img):
+    target_ratio = DISPLAY_W / DISPLAY_H
+    src_ratio = img.width / img.height
+    if src_ratio > target_ratio:
+        new_w = int(img.height * target_ratio)
+        left = (img.width - new_w) // 2
+        img = img.crop((left, 0, left + new_w, img.height))
+    else:
+        new_h = int(img.width / target_ratio)
+        top = (img.height - new_h) // 2
+        img = img.crop((0, top, img.width, top + new_h))
+    return img.resize((DISPLAY_W, DISPLAY_H), Image.LANCZOS)
+
+
 def watermark_image(src_path, dst_path):
-    img = Image.open(src_path).convert("RGBA")
+    img = crop_to_display(Image.open(src_path)).convert("RGBA")
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
