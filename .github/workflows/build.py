@@ -308,9 +308,7 @@ def render_gallery(page):
 </select>
 </font>
 <br><br>
-<div style="max-width:1100px;">
 {photos_html}
-</div>
 </td>
 </tr>
 <script>
