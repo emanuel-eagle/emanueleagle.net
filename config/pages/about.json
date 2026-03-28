@@ -2,13 +2,12 @@
   "title": "About",
   "layout": "two-column",
   "left_blurbs": [
-    "A bit about me...",
-    "...who I am and what I do."
+    "This site is less so about me...",
+    "...moreso about what I do."
   ],
   "right_content": [
-    "<b>About Me.</b> My name is Emanuel Eagle. I'm a developer and bird photographer.",
-    "I've been building things on the web for as long as I can remember. I enjoy working on projects that are useful, interesting, or both.",
-    "When I'm not coding, you'll probably find me outside with a camera, looking for birds. Photography has been a lifelong hobby that keeps me connected to the natural world.",
+    "<b>About Me.</b> My name is Emanuel Eagle. I'm a engineer dabbling in distributed systems, sports card collector, amateur photographer and boston sports fan.",
+    "I'm a serial hobby collector, so I figured it would be cool to send the things I do into the void of the internet",
     "Thanks for stopping by."
   ]
 }
