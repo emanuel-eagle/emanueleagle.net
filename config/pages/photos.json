@@ -7,8 +7,15 @@
     {
       "src": "images/American_Bittern_2.jpeg",
       "caption": "An American Bittern sitting on a branch",
-      "title": "American Bittern",
-      "date": "2026-03-01",
+      "title": "American Bittern on a Branch",
+      "date": "2021-09-19",
+      "tags": ["Birds", "Nature"]
+    },
+    {
+      "src": "images/Great_Egret_1.jpeg",
+      "caption": "A Great Egret flying through the sky at Plum Island Wildlife Refuge",
+      "title": "Great Egret Flying",
+      "date": "2021-08-13",
       "tags": ["Birds", "Nature"]
     }
   ]
