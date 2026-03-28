@@ -287,8 +287,8 @@ def render_gallery(page):
         tags = ",".join(photo.get("tags", []))
         photos_html += f"""<div class="photo-item" data-tags="{tags}" style="display:inline-block; vertical-align:top; margin:4px;">
 <table border="1" cellpadding="4" cellspacing="0" bordercolor="#808080">
-<tr><td><img src="{photo["src"]}" alt="{photo["title"]}" width="200"></td></tr>
-<tr><td bgcolor="#FFFFCC" width="200"><font face="Times New Roman" size="2">
+<tr><td><img src="{photo["src"]}" alt="{photo["title"]}" width="600" height="300" style="object-fit:cover;display:block;"></td></tr>
+<tr><td bgcolor="#FFFFCC" width="600"><font face="Times New Roman" size="2">
 <b>{photo["title"]}</b><br>
 {photo["caption"]}
 <br><font size="1" color="#666666">{photo["date"]}</font>
