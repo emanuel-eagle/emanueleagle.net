@@ -7,10 +7,10 @@
     "Thanks for stopping by."
   ],
   "right_content": [
-    "<b>Welcome to my homepage.</b> I'm glad you found . Have a look around &mdash; there's always something new being added.",
+    "<b>Welcome to my homepage.</b> Have a look around &mdash; I hope you find something interesting or of value to you here.",
     "<b><a href=\"projects.html\">Take a look at my projects</a>.</b> I'm always building something new, so check back often to see what I've been working on.",
-    "If you're interested in what I've been thinking about lately, head over to the <b><a href=\"blog.html\">blog</a></b>. I write about development, photography, and whatever else is on my mind.",
-    "I'm also a bird photographer. You can browse my collection on the <b><a href=\"birds.html\">bird photos</a></b> page. New photos are added regularly as I get out in the field.",
+    "If you're interested in what I've been thinking about lately, head over to the <b><a href=\"blog.html\">blog</a></b>. I write about whatever is on my mind.",
+    "I'm also a photographer. You can browse my collection on the <b><a href=\"photos.html\">photos</a></b> page. New photos are added randomly.",
     "<b>Learn more <a href=\"about.html\">about what this site is all about</a></b>."
   ]
 }
