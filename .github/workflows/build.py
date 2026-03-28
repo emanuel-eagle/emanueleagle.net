@@ -166,7 +166,9 @@ def render_blog_index(page):
 
     post_links = ""
     for slug, post in posts:
-        post_links += f"""<b><a href="blog/{slug}.html">{post["title"]}</a></b> <font size="2" color="#666666">({post["date"]})</font><br><br>
+        description = post.get("description", "")
+        desc_html = f"""<br><font size="2">{description}</font>""" if description else ""
+        post_links += f"""<b><a href="blog/{slug}.html">{post["title"]}</a></b> <font size="2" color="#666666">({post["date"]})</font>{desc_html}<br><br>
 """
 
     return f"""<tr>
