@@ -153,7 +153,7 @@ def render_list(page):
 
     tags_filter = ""
     if page.get("tags"):
-        tags_filter = f"""<label for="project-tags"><i>Filter by tag:</i></label>
+        tags_filter = f"""<label for="project-tags">Filter by tag:</label>
 <select id="project-tags" name="project-tags">
 {tags_html}
 </select>"""
@@ -214,7 +214,7 @@ def render_blog_index(page):
 
     tags_filter = ""
     if page.get("tags"):
-        tags_filter = f"""<label for="blog-tags"><i>Filter by tag:</i></label>
+        tags_filter = f"""<label for="blog-tags">Filter by tag:</label>
 <select id="blog-tags" name="blog-tags">
 {tags_html}
 </select>"""
@@ -272,7 +272,7 @@ def render_gallery(page):
 <br>
 <font face="Times New Roman, Times, serif" size="3">
 <i>{page["intro"]}</i>
-<label for="tags"><i>Filter images with this:</i></label>
+<label for="tags">Filter images with this:</label>
 <select id="tags" name="tags">
 {tags_html}
 </select>
