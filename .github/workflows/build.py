@@ -283,13 +283,13 @@ def render_gallery(page):
     for i in range(len(page["tags"])):
         tag = page["tags"][i]
         tags_html += f"<option value={tag}>{tag}</option>"
-    for photo in page["photos"]:
+    for photo in sorted(page["photos"], key=lambda p: p["title"]):
         tags = ",".join(photo.get("tags", []))
         photos_html += f"""<div class="photo-item" data-tags="{tags}">
 <table border="1" cellpadding="4" cellspacing="0" bordercolor="#808080">
 <tr><td><img src="{photo["src"]}" alt="{photo["species"]}" width="400"></td></tr>
 <tr><td bgcolor="#FFFFCC"><font face="Times New Roman" size="2">
-<b>{photo["species"]}</b><br>
+<b>{photo["title"]}</b><br>
 {photo["caption"]}
 <br><font size="1" color="#666666">{photo["date"]}</font>
 </font></td></tr>
