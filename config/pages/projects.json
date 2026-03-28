@@ -4,14 +4,14 @@
   "intro": "Here are some things I've been working on.",
   "items": [
     {
-      "name": "Project One",
-      "description": "A cool thing I built.",
-      "link": ""
+      "name": "This website",
+      "description": "The code for the website you're currently looking at!",
+      "link": "https://github.com/emanuel-eagle/emanueleagle.net"
     },
     {
-      "name": "Project Two",
-      "description": "Another cool thing I built.",
-      "link": ""
+      "name": "Temperature Trends in the Northeastern United States, 1950–2018",
+      "description": "An honors thesis analyzing decades of climate data across the Northeast. Published through Connecticut College's Environmental Studies program, 2022.",
+      "link": "https://digitalcommons.conncoll.edu/cgi/viewcontent.cgi?article=1020&context=envirohp"
     }
   ]
 }
