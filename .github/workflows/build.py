@@ -28,7 +28,6 @@ def render_nav(site, current_title, prefix=""):
             parts.append(f"[<b>{label}</b>]")
         else:
             parts.append(f'[<a href="{prefix}{href}">{label}</a>]')
-    parts.append(f'[<a href="mailto:emanuel@example.com">Contact</a>]')
     return "\n&nbsp; ".join(parts)
 
 
@@ -36,10 +35,10 @@ def render_header(site, prefix=""):
     return f"""<!-- LOGO / HEADER -->
 <tr>
 <td colspan="2">
-<a href="{prefix}index.html"><table border="2" cellpadding="0" cellspacing="0" bordercolor="#000000"><tr>
+<table border="2" cellpadding="0" cellspacing="0" bordercolor="#000000"><tr>
 <td bgcolor="#000000"><font face="Times New Roman, Times, serif" size="4" color="#FFFFFF"><b>&nbsp;Emanuel&nbsp;</b></font></td>
 <td bgcolor="#FFFFFF"><font face="Times New Roman, Times, serif" size="4"><b>&nbsp;Eagle&nbsp;</b></font></td>
-</tr></table></a>
+</tr></table>
 </td>
 </tr>"""
 
@@ -76,7 +75,7 @@ def wrap_page(title, site, body, prefix=""):
 <!-- NAVIGATION -->
 <tr>
 <td colspan="2">
-<font face="Times New Roman, Times, serif" size="2">
+<font face="Times New Roman, Times, serif" size="3">
 {nav}
 </font>
 <hr size="1" noshade>
