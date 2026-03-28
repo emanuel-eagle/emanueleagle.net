@@ -30,8 +30,8 @@ def watermark_image(src_path, dst_path):
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
     margin = 10
-    x = img.width - text_w - margin
-    y = img.height - text_h - margin
+    x = img.width - text_w - margin - 40
+    y = img.height - text_h - margin - 20
 
     # Shadow for readability
     draw.text((x + 1, y + 1), WATERMARK_TEXT, font=font, fill=(0, 0, 0, 180))
