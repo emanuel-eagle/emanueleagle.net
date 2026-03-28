@@ -1,14 +1,15 @@
 {
   "title": "Photos",
   "layout": "gallery",
-  "intro": "A collection of bird photos from the field. New photos added regularly.",
+  "tags" : ["All", "Birds", "Nature", "Lego"],
+  "intro": "A collection of my photos. New photos added regularly.",
   "photos": [
     {
       "src": "images/American_Bittern_2.jpeg",
       "caption": "An American Bittern sitting on a branch",
       "species": "American Bittern",
       "date": "2026-03-01",
-      "tags": ["Birds"]
+      "tags": ["Birds", "Nature"]
     }
   ]
 }

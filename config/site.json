@@ -5,7 +5,7 @@
     { "label": "About", "href": "about.html" },
     { "label": "Projects", "href": "projects.html" },
     { "label": "Blog", "href": "blog.html" },
-    { "label": "Photos", "href": "birds.html" }
+    { "label": "Photos", "href": "photos.html" }
   ],
   "footer": "&copy; 2026 Emanuel Eagle"
 }

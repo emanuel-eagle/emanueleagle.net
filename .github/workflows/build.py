@@ -181,10 +181,12 @@ def render_blog_index(page):
 
 def render_gallery(page):
     photos_html = ""
+    tags_html = ""
+    for i in range(len(page["tags"])):
+        tag = page["tags"][i]
+        tags_html += f"<option value={tag}>{tag}</option>"
     for photo in page["photos"]:
-        tags = ",".join(photo.get("tags", []))
-        photos_html += f"""<div class="photo-item" data-tags="{tags}">
-<table border="1" cellpadding="4" cellspacing="0" bordercolor="#808080">
+        photos_html += f"""<table border="1" cellpadding="4" cellspacing="0" bordercolor="#808080">
 <tr><td><img src="{photo["src"]}" alt="{photo["species"]}" width="400"></td></tr>
 <tr><td bgcolor="#FFFFCC"><font face="Times New Roman" size="2">
 <b>{photo["species"]}</b><br>
@@ -193,7 +195,6 @@ def render_gallery(page):
 </font></td></tr>
 </table>
 <br>
-</div>
 """
 
     return f"""<tr>
@@ -203,29 +204,13 @@ def render_gallery(page):
 <i>{page["intro"]}</i>
 <label for="tags">Image filter:</label>
 <select id="tags" name="tags">
-  <option value="All">All</option>
-  <option value="Birds">Birds</option>
-  <option value="Lego">Lego</option>
-  <option value="Nature">Nature</option>
+{tags_html}
 </select>
 </font>
 <br><br>
 {photos_html}
 </td>
-</tr>
-<script>
-document.getElementById('tags').addEventListener('change', function() {{
-  var selected = this.value;
-  document.querySelectorAll('.photo-item').forEach(function(el) {{
-    if (selected === 'All') {{
-      el.style.display = '';
-    }} else {{
-      var tags = el.getAttribute('data-tags').split(',');
-      el.style.display = tags.indexOf(selected) !== -1 ? '' : 'none';
-    }}
-  }});
-}});
-</script>"""
+</tr>"""
 
 
 def render_blog_post(slug, post, site):
