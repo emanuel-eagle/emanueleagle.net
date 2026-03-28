@@ -51,6 +51,12 @@ resource "aws_cloudfront_distribution" "site" {
     max_ttl     = 86400
   }
 
+  logging_config {
+    bucket          = aws_s3_bucket.logs.bucket_regional_domain_name
+    prefix          = "cloudfront/"
+    include_cookies = false
+  }
+
   restrictions {
     geo_restriction {
       restriction_type = "none"
