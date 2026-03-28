@@ -57,6 +57,8 @@ resource "aws_cloudfront_distribution" "site" {
     include_cookies = false
   }
 
+  depends_on = [aws_s3_bucket_acl.logs]
+
   restrictions {
     geo_restriction {
       restriction_type = "none"

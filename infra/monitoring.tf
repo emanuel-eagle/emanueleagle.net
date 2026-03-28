@@ -11,10 +11,33 @@ resource "aws_s3_bucket_ownership_controls" "logs" {
   }
 }
 
+data "aws_canonical_user_id" "current" {}
+
 resource "aws_s3_bucket_acl" "logs" {
   depends_on = [aws_s3_bucket_ownership_controls.logs]
   bucket     = aws_s3_bucket.logs.id
-  acl        = "log-delivery-write"
+
+  access_control_policy {
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
+    # Bucket owner full control
+    grant {
+      grantee {
+        type = "CanonicalUser"
+        id   = data.aws_canonical_user_id.current.id
+      }
+      permission = "FULL_CONTROL"
+    }
+    # CloudFront logs delivery account
+    grant {
+      grantee {
+        type = "CanonicalUser"
+        id   = "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0"
+      }
+      permission = "FULL_CONTROL"
+    }
+  }
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "logs" {
@@ -22,6 +45,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "logs" {
   rule {
     id     = "expire-old-logs"
     status = "Enabled"
+    filter {}
     expiration {
       days = 90
     }
