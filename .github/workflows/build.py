@@ -223,7 +223,7 @@ def render_blog_index(page):
 <td colspan="2">
 <br>
 <font face="Times New Roman, Times, serif" size="3">
-<i>{page["intro"]}</i>
+{page["intro"]}
 {tags_filter}
 </font>
 <br><br>
@@ -271,7 +271,7 @@ def render_gallery(page):
 <td colspan="2">
 <br>
 <font face="Times New Roman, Times, serif" size="3">
-<i>{page["intro"]}</i>
+{page["intro"]}
 <label for="tags">Filter images with this:</label>
 <select id="tags" name="tags">
 {tags_html}
