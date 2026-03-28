@@ -130,9 +130,10 @@ def render_two_column(page):
 def render_list(page):
     rows = ""
     for item in page["items"]:
+        link_html = f' <a href="{item["link"]}">see project</a>' if item.get("link") else ""
         rows += f"""<tr>
 <td><font face="Times New Roman" size="3"><b>{item["name"]}</b></font></td>
-<td><font face="Times New Roman" size="3">{item["description"]}</font></td>
+<td><font face="Times New Roman" size="3">{item["description"]}{link_html}</font></td>
 </tr>
 """
 
