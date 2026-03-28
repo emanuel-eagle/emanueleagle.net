@@ -163,11 +163,26 @@ def render_blog_index(page):
         slug = os.path.splitext(os.path.basename(path))[0]
         posts.append((slug, post))
 
+    tags_html = ""
+    for tag in page.get("tags", []):
+        tags_html += f'<option value="{tag}">{tag}</option>'
+
     post_links = ""
     for slug, post in posts:
         description = post.get("description", "")
         desc_html = f"""<br><font size="2">{description}</font>""" if description else ""
-        post_links += f"""<b><a href="blog/{slug}.html">{post["title"]}</a></b> <font size="2" color="#666666">({post["date"]})</font>{desc_html}<br><br>
+        tags = ",".join(post.get("tags", []))
+        post_links += f"""<div class="post-item" data-tags="{tags}"><b><a href="blog/{slug}.html">{post["title"]}</a></b> <font size="2" color="#666666">({post["date"]})</font>{desc_html}<br><br>
+</div>
+"""
+
+    tags_filter = ""
+    if page.get("tags"):
+        tags_filter = f"""<label for="blog-tags"><i>Filter by tag:</i></label>
+<select id="blog-tags" name="blog-tags">
+{tags_html}
+</select>
+<br><br>
 """
 
     return f"""<tr>
@@ -176,11 +191,24 @@ def render_blog_index(page):
 <font face="Times New Roman, Times, serif" size="3">
 <i>{page["intro"]}</i>
 <br><br>
-<hr size="1" noshade>
+{tags_filter}<hr size="1" noshade>
 {post_links}
 </font>
 </td>
-</tr>"""
+</tr>
+<script>
+document.getElementById('blog-tags').addEventListener('change', function() {{
+  var selected = this.value;
+  document.querySelectorAll('.post-item').forEach(function(el) {{
+    if (selected === 'All') {{
+      el.style.display = '';
+    }} else {{
+      var tags = el.getAttribute('data-tags').split(',');
+      el.style.display = tags.indexOf(selected) !== -1 ? '' : 'none';
+    }}
+  }});
+}});
+</script>"""
 
 
 def render_gallery(page):

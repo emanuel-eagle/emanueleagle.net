@@ -2,5 +2,6 @@
   "title": "Blog",
   "layout": "blog",
   "intro": "Thoughts, write-ups, and musings.",
-  "posts_dir": "config/blog"
+  "posts_dir": "config/blog",
+  "tags": ["All", "Dev", "Photography", "General"]
 }
