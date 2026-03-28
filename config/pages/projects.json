@@ -2,16 +2,21 @@
   "title": "Projects",
   "layout": "list",
   "intro": "Here are some things I've been working on.",
+  "tags": ["All", "Dev", "Research", "Writing"],
   "items": [
     {
       "name": "This website",
       "description": "The code for the website you're currently looking at!",
-      "link": "https://github.com/emanuel-eagle/emanueleagle.net"
+      "link": "https://github.com/emanuel-eagle/emanueleagle.net",
+      "tags": ["Dev"],
+      "status": "In Progress"
     },
     {
       "name": "Temperature Trends in the Northeastern United States, 1950–2018",
       "description": "An honors thesis analyzing decades of climate data across the Northeast. Published through Connecticut College's Environmental Studies program, 2022.",
-      "link": "https://digitalcommons.conncoll.edu/cgi/viewcontent.cgi?article=1020&context=envirohp"
+      "link": "https://digitalcommons.conncoll.edu/cgi/viewcontent.cgi?article=1020&context=envirohp",
+      "tags": ["Research", "Writing"],
+      "status": "Complete"
     }
   ]
 }

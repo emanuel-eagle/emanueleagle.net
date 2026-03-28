@@ -127,14 +127,37 @@ def render_two_column(page):
 
 
 def render_list(page):
+    status_colors = {
+        "Complete": "#006600",
+        "In Progress": "#CC6600",
+    }
+
+    tags_html = ""
+    for tag in page.get("tags", []):
+        tags_html += f'<option value="{tag}">{tag}</option>'
+
     rows = ""
     for item in page["items"]:
         link_html = f'<a href="{item["link"]}">View</a>' if item.get("link") else ""
-        rows += f"""<tr>
+        status = item.get("status", "")
+        color = status_colors.get(status, "#000000")
+        status_html = f'<font color="{color}"><b>{status}</b></font>' if status else ""
+        tags = ",".join(item.get("tags", []))
+        rows += f"""<tr class="project-row" data-tags="{tags}">
 <td><font face="Times New Roman" size="3"><b>{item["name"]}</b></font></td>
 <td><font face="Times New Roman" size="3">{item["description"]}</font></td>
+<td align="center"><font face="Times New Roman" size="3">{status_html}</font></td>
 <td align="center"><font face="Times New Roman" size="3">{link_html}</font></td>
 </tr>
+"""
+
+    tags_filter = ""
+    if page.get("tags"):
+        tags_filter = f"""<label for="project-tags"><i>Filter by tag:</i></label>
+<select id="project-tags" name="project-tags">
+{tags_html}
+</select>
+<br><br>
 """
 
     return f"""<tr>
@@ -144,15 +167,29 @@ def render_list(page):
 {page["intro"]}
 </font>
 <br><br>
-<table border="1" cellpadding="5" cellspacing="0" bordercolor="#808080" width="100%">
+{tags_filter}<table border="1" cellpadding="5" cellspacing="0" bordercolor="#808080" width="100%">
 <tr bgcolor="#FFFFCC">
 <td><font face="Arial" size="2"><b>Project</b></font></td>
 <td><font face="Arial" size="2"><b>Description</b></font></td>
+<td><font face="Arial" size="2"><b>Status</b></font></td>
 <td><font face="Arial" size="2"><b>Link</b></font></td>
 </tr>
 {rows}</table>
 </td>
-</tr>"""
+</tr>
+<script>
+document.getElementById('project-tags').addEventListener('change', function() {{
+  var selected = this.value;
+  document.querySelectorAll('.project-row').forEach(function(el) {{
+    if (selected === 'All') {{
+      el.style.display = '';
+    }} else {{
+      var tags = el.getAttribute('data-tags').split(',');
+      el.style.display = tags.indexOf(selected) !== -1 ? '' : 'none';
+    }}
+  }});
+}});
+</script>"""
 
 
 def render_blog_index(page):
