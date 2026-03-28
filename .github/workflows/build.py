@@ -36,8 +36,8 @@ def render_header(site, prefix=""):
 <tr>
 <td colspan="2">
 <table border="2" cellpadding="0" cellspacing="0" bordercolor="#000000"><tr>
-<td bgcolor="#000000"><font face="Times New Roman, Times, serif" size="4" color="#FFFFFF"><b>&nbsp;Emanuel&nbsp;</b></font></td>
-<td bgcolor="#FFFFFF"><font face="Times New Roman, Times, serif" size="4"><b>&nbsp;Eagle&nbsp;</b></font></td>
+<td bgcolor="#000000"><font face="Times New Roman, Times, serif" size="5" color="#FFFFFF"><b>&nbsp;Emanuel&nbsp;</b></font></td>
+<td bgcolor="#FFFFFF"><font face="Times New Roman, Times, serif" size="5"><b>&nbsp;Eagle&nbsp;</b></font></td>
 </tr></table>
 </td>
 </tr>"""
