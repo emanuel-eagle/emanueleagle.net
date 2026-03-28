@@ -278,23 +278,22 @@ document.getElementById('blog-tags').addEventListener('change', function() {{
 
 
 def render_gallery(page):
-    photos_html = ""
     tags_html = ""
-    for i in range(len(page["tags"])):
-        tag = page["tags"][i]
+    for tag in page["tags"]:
         tags_html += f"<option value={tag}>{tag}</option>"
+
+    photos_html = ""
     for photo in sorted(page["photos"], key=lambda p: p["title"]):
         tags = ",".join(photo.get("tags", []))
-        photos_html += f"""<div class="photo-item" data-tags="{tags}">
+        photos_html += f"""<div class="photo-item" data-tags="{tags}" style="display:inline-block; vertical-align:top; margin:4px;">
 <table border="1" cellpadding="4" cellspacing="0" bordercolor="#808080">
-<tr><td><img src="{photo["src"]}" alt="{photo["title"]}" width="400"></td></tr>
-<tr><td bgcolor="#FFFFCC"><font face="Times New Roman" size="2">
+<tr><td><img src="{photo["src"]}" alt="{photo["title"]}" width="200"></td></tr>
+<tr><td bgcolor="#FFFFCC" width="200"><font face="Times New Roman" size="2">
 <b>{photo["title"]}</b><br>
 {photo["caption"]}
 <br><font size="1" color="#666666">{photo["date"]}</font>
 </font></td></tr>
 </table>
-<br>
 </div>
 """
 
@@ -309,7 +308,9 @@ def render_gallery(page):
 </select>
 </font>
 <br><br>
+<div style="max-width:1100px;">
 {photos_html}
+</div>
 </td>
 </tr>
 <script>
@@ -317,10 +318,10 @@ document.getElementById('tags').addEventListener('change', function() {{
   var selected = this.value;
   document.querySelectorAll('.photo-item').forEach(function(el) {{
     if (selected === 'All') {{
-      el.style.display = '';
+      el.style.display = 'inline-block';
     }} else {{
       var tags = el.getAttribute('data-tags').split(',');
-      el.style.display = tags.indexOf(selected) !== -1 ? '' : 'none';
+      el.style.display = tags.indexOf(selected) !== -1 ? 'inline-block' : 'none';
     }}
   }});
 }});
