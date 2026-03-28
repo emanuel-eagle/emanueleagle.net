@@ -7,7 +7,8 @@
       "src": "images/American_Bittern_2.jpeg",
       "caption": "An American Bittern sitting on a branch",
       "species": "American Bittern",
-      "date": "2026-03-01"
+      "date": "2026-03-01",
+      "tags": ["Birds"]
     }
   ]
 }
