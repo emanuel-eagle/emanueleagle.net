@@ -156,18 +156,17 @@ def render_list(page):
         tags_filter = f"""<label for="project-tags"><i>Filter by tag:</i></label>
 <select id="project-tags" name="project-tags">
 {tags_html}
-</select>
-<br><br>
-"""
+</select>"""
 
     return f"""<tr>
 <td colspan="2">
 <br>
 <font face="Times New Roman, Times, serif" size="3">
 {page["intro"]}
+{tags_filter}
 </font>
 <br><br>
-{tags_filter}<table border="1" cellpadding="5" cellspacing="0" bordercolor="#808080" width="100%">
+<table border="1" cellpadding="5" cellspacing="0" bordercolor="#808080" width="100%">
 <tr bgcolor="#FFFFCC">
 <td><font face="Arial" size="2"><b>Project</b></font></td>
 <td><font face="Arial" size="2"><b>Description</b></font></td>
@@ -218,19 +217,18 @@ def render_blog_index(page):
         tags_filter = f"""<label for="blog-tags"><i>Filter by tag:</i></label>
 <select id="blog-tags" name="blog-tags">
 {tags_html}
-</select>
-<br><br>
-"""
+</select>"""
 
     return f"""<tr>
 <td colspan="2">
 <br>
 <font face="Times New Roman, Times, serif" size="3">
 <i>{page["intro"]}</i>
-<br><br>
-{tags_filter}<hr size="1" noshade>
-{post_links}
+{tags_filter}
 </font>
+<br><br>
+<hr size="1" noshade>
+{post_links}
 </td>
 </tr>
 <script>
