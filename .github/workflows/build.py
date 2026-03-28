@@ -6,8 +6,39 @@ import json
 import os
 import shutil
 
+from PIL import Image, ImageDraw, ImageFont
+
 CONFIG_DIR = "config"
 OUTPUT_DIR = "html"
+
+
+WATERMARK_TEXT = "© emanueleagle.net"
+
+
+def watermark_image(src_path, dst_path):
+    img = Image.open(src_path).convert("RGBA")
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    font_size = max(14, img.width // 40)
+    try:
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+    except OSError:
+        font = ImageFont.load_default()
+
+    bbox = draw.textbbox((0, 0), WATERMARK_TEXT, font=font)
+    text_w = bbox[2] - bbox[0]
+    text_h = bbox[3] - bbox[1]
+    margin = 10
+    x = img.width - text_w - margin
+    y = img.height - text_h - margin
+
+    # Shadow for readability
+    draw.text((x + 1, y + 1), WATERMARK_TEXT, font=font, fill=(0, 0, 0, 180))
+    draw.text((x, y), WATERMARK_TEXT, font=font, fill=(255, 255, 255, 200))
+
+    watermarked = Image.alpha_composite(img, overlay).convert("RGB")
+    watermarked.save(dst_path, quality=90)
 
 
 def load_json(path):
@@ -322,14 +353,21 @@ def build():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(os.path.join(OUTPUT_DIR, "blog"), exist_ok=True)
 
-    # Copy images
+    # Copy and watermark images
     src_images = os.path.join(CONFIG_DIR, "pages", "images")
     dst_images = os.path.join(OUTPUT_DIR, "images")
     if os.path.isdir(src_images):
         if os.path.exists(dst_images):
             shutil.rmtree(dst_images)
-        shutil.copytree(src_images, dst_images)
-        print(f"Copied images to {dst_images}")
+        os.makedirs(dst_images)
+        for fname in os.listdir(src_images):
+            src = os.path.join(src_images, fname)
+            dst = os.path.join(dst_images, fname)
+            if fname.lower().endswith((".jpg", ".jpeg", ".png")):
+                watermark_image(src, dst)
+                print(f"Watermarked {fname}")
+            else:
+                shutil.copy2(src, dst)
 
     # Build pages
     for path in glob.glob(os.path.join(CONFIG_DIR, "pages", "*.json")):
