@@ -198,6 +198,12 @@ def render_gallery(page):
 <br>
 <font face="Times New Roman, Times, serif" size="3">
 <i>{page["intro"]}</i>
+<label for="tags">Image filter:</label>
+<select id="tags" name="tags">
+  <option value="Birds">Birds</option>
+  <option value="Lego">Lego</option>
+  <option value="Nature">Nature</option>
+</select>
 </font>
 <br><br>
 {photos_html}
