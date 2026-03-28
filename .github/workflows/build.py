@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Generates static HTML from JSON configs."""
 
+import glob
 import json
 import os
-import glob
+import shutil
 
 CONFIG_DIR = "config"
 OUTPUT_DIR = "html"
@@ -229,6 +230,15 @@ def build():
     site = site_config()
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(os.path.join(OUTPUT_DIR, "blog"), exist_ok=True)
+
+    # Copy images
+    src_images = os.path.join(CONFIG_DIR, "pages", "images")
+    dst_images = os.path.join(OUTPUT_DIR, "images")
+    if os.path.isdir(src_images):
+        if os.path.exists(dst_images):
+            shutil.rmtree(dst_images)
+        shutil.copytree(src_images, dst_images)
+        print(f"Copied images to {dst_images}")
 
     # Build pages
     for path in glob.glob(os.path.join(CONFIG_DIR, "pages", "*.json")):
