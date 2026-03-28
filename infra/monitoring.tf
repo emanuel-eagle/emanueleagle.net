@@ -93,10 +93,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Requests"
-          view   = "timeSeries"
-          stat   = "Sum"
-          period = 3600
+          title   = "Requests"
+          view    = "timeSeries"
+          stat    = "Sum"
+          period  = 3600
+          region  = var.aws_region
           metrics = [
             ["AWS/CloudFront", "Requests", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global"]
           ]
@@ -110,10 +111,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Bandwidth Downloaded"
-          view   = "timeSeries"
-          stat   = "Sum"
-          period = 3600
+          title   = "Bandwidth Downloaded"
+          view    = "timeSeries"
+          stat    = "Sum"
+          period  = 3600
+          region  = var.aws_region
           metrics = [
             ["AWS/CloudFront", "BytesDownloaded", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global"]
           ]
@@ -127,10 +129,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Cache Hit Rate (%)"
-          view   = "timeSeries"
-          stat   = "Average"
-          period = 3600
+          title   = "Cache Hit Rate (%)"
+          view    = "timeSeries"
+          stat    = "Average"
+          period  = 3600
+          region  = var.aws_region
           metrics = [
             ["AWS/CloudFront", "CacheHitRate", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global"]
           ]
@@ -147,9 +150,10 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Origin Latency (ms)"
-          view   = "timeSeries"
-          period = 3600
+          title   = "Origin Latency (ms)"
+          view    = "timeSeries"
+          period  = 3600
+          region  = var.aws_region
           metrics = [
             ["AWS/CloudFront", "OriginLatency", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global", { stat = "p50", label = "p50" }],
             ["AWS/CloudFront", "OriginLatency", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global", { stat = "p90", label = "p90" }],
@@ -165,10 +169,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Error Rates (%)"
-          view   = "timeSeries"
-          stat   = "Average"
-          period = 3600
+          title   = "Error Rates (%)"
+          view    = "timeSeries"
+          stat    = "Average"
+          period  = 3600
+          region  = var.aws_region
           metrics = [
             ["AWS/CloudFront", "4xxErrorRate", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global", { label = "4xx" }],
             ["AWS/CloudFront", "5xxErrorRate", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global", { label = "5xx" }],
@@ -187,10 +192,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Error Breakdown (%)"
-          view   = "timeSeries"
-          stat   = "Average"
-          period = 3600
+          title   = "Error Breakdown (%)"
+          view    = "timeSeries"
+          stat    = "Average"
+          period  = 3600
+          region  = var.aws_region
           metrics = [
             ["AWS/CloudFront", "401ErrorRate", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global", { label = "401 Unauthorized" }],
             ["AWS/CloudFront", "403ErrorRate", "DistributionId", aws_cloudfront_distribution.site.id, "Region", "Global", { label = "403 Forbidden" }],
@@ -223,10 +229,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Total Estimated Charges (USD)"
-          view   = "timeSeries"
-          stat   = "Maximum"
-          period = 86400
+          title   = "Total Estimated Charges (USD)"
+          view    = "timeSeries"
+          stat    = "Maximum"
+          period  = 86400
+          region  = var.aws_region
           metrics = [
             ["AWS/Billing", "EstimatedCharges", "Currency", "USD"]
           ]
@@ -240,10 +247,11 @@ resource "aws_cloudwatch_dashboard" "site" {
         width  = 12
         height = 6
         properties = {
-          title  = "Charges by Service (USD)"
-          view   = "timeSeries"
-          stat   = "Maximum"
-          period = 86400
+          title   = "Charges by Service (USD)"
+          view    = "timeSeries"
+          stat    = "Maximum"
+          period  = 86400
+          region  = var.aws_region
           metrics = [
             ["AWS/Billing", "EstimatedCharges", "ServiceName", "AmazonCloudFront", "Currency", "USD", { label = "CloudFront" }],
             ["AWS/Billing", "EstimatedCharges", "ServiceName", "AmazonS3", "Currency", "USD", { label = "S3" }],
