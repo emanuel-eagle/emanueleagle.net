@@ -30,7 +30,7 @@ def watermark_image(src_path, dst_path):
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
     margin = 10
-    x = img.width - text_w - margin - 40
+    x = img.width - text_w - margin - 60
     y = img.height - text_h - margin - 20
 
     # Shadow for readability
