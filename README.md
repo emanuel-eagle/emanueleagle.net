@@ -55,7 +55,7 @@ Edit `config/pages/photos.json`.
 ```json
 {
   "src": "images/filename.jpeg",
-  "species": "American Bittern",
+  "title": "American Bittern",
   "caption": "A short description",
   "date": "2026-03-01",
   "tags": ["Birds", "Nature"]
@@ -80,6 +80,16 @@ Create a new file in `config/blog/` named `YYYY-MM-DD-post-slug.json`:
 ```
 
 Each string in `content` is a separate paragraph. The blog index page updates automatically.
+
+## Local preview
+
+To build and preview the site locally before pushing:
+
+```bash
+./serve.sh
+```
+
+Then open `http://localhost:8080` in your browser. Hit `Ctrl+C` to stop. The script installs Pillow if needed, runs the build, and serves the output.
 
 ## Deploy
 
