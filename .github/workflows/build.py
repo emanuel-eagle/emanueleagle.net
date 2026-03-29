@@ -12,50 +12,53 @@ CONFIG_DIR = "config"
 OUTPUT_DIR = "html"
 
 
-WATERMARK_TEXT = "© emanueleagle.net"
-
-
-DISPLAY_W, DISPLAY_H = 600, 300
-
-
-def crop_to_display(img):
-    target_ratio = DISPLAY_W / DISPLAY_H
-    src_ratio = img.width / img.height
-    if src_ratio > target_ratio:
-        new_w = int(img.height * target_ratio)
-        left = (img.width - new_w) // 2
-        img = img.crop((left, 0, left + new_w, img.height))
-    else:
-        new_h = int(img.width / target_ratio)
-        top = (img.height - new_h) // 2
-        img = img.crop((0, top, img.width, top + new_h))
-    return img.resize((DISPLAY_W, DISPLAY_H), Image.LANCZOS)
+WATERMARK_TEXT = "emanueleagle.net"
 
 
 def watermark_image(src_path, dst_path):
-    img = crop_to_display(Image.open(src_path)).convert("RGBA")
+    img = Image.open(src_path).convert("RGBA")
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
-    font_size = max(14, img.width // 40)
-    try:
-        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
-    except OSError:
+    # Calculate the visible region after object-fit:cover crops to 600x300
+    scale = max(600 / img.width, 300 / img.height)
+
+    # Font size in display pixels, scaled up to full-res image coordinates
+    display_font_size = 8
+    font_size = max(14, int(display_font_size / scale))
+    font_paths = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
+        "/System/Library/Fonts/Helvetica.ttc",                    # macOS
+        "/System/Library/Fonts/Arial.ttf",                        # macOS alt
+    ]
+    font = None
+    for path in font_paths:
+        try:
+            font = ImageFont.truetype(path, font_size)
+            break
+        except OSError:
+            continue
+    if font is None:
         font = ImageFont.load_default()
 
     bbox = draw.textbbox((0, 0), WATERMARK_TEXT, font=font)
     text_w = bbox[2] - bbox[0]
     text_h = bbox[3] - bbox[1]
-    margin = 10
-    x = img.width - text_w - margin - 60
-    y = img.height - text_h - margin - 20
+    margin = int(10 / scale)
+    visible_w = 600 / scale
+    visible_h = 300 / scale
+    offset_x = (img.width - visible_w) / 2
+    offset_y = (img.height - visible_h) / 2
+
+    x = int(offset_x + visible_w - text_w - margin - int(60 / scale))
+    y = int(offset_y + visible_h - text_h - margin - int(20 / scale))
 
     # Shadow for readability
     draw.text((x + 1, y + 1), WATERMARK_TEXT, font=font, fill=(0, 0, 0, 180))
     draw.text((x, y), WATERMARK_TEXT, font=font, fill=(255, 255, 255, 200))
 
     watermarked = Image.alpha_composite(img, overlay).convert("RGB")
-    watermarked.save(dst_path, quality=90)
+    watermarked.save(dst_path, quality=95)
 
 
 def load_json(path):
@@ -304,7 +307,7 @@ def render_gallery(page):
         tags = ",".join(photo.get("tags", []))
         photos_html += f"""<div class="photo-item" data-tags="{tags}" style="display:inline-block; vertical-align:top; margin:4px;">
 <table border="1" cellpadding="4" cellspacing="0" bordercolor="#808080">
-<tr><td><img src="{photo["src"]}" alt="{photo["title"]}" width="600" height="300" style="object-fit:cover;display:block;"></td></tr>
+<tr><td><img src="{photo["src"]}" alt="{photo["title"]}" width="600" height="300" style="object-fit:cover;display:block;cursor:pointer;" onclick="document.getElementById('lightbox').style.display='flex';document.getElementById('lightbox-img').src=this.src;"></td></tr>
 <tr><td bgcolor="#FFFFCC" width="600"><font face="Times New Roman" size="2">
 <b>{photo["title"]}</b><br>
 {photo["caption"]}
@@ -328,6 +331,12 @@ def render_gallery(page):
 {photos_html}
 </td>
 </tr>
+<tr><td colspan="2">
+<div id="lightbox" onclick="this.style.display='none';" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:999;justify-content:center;align-items:center;">
+<span onclick="document.getElementById('lightbox').style.display='none';" style="position:fixed;top:16px;right:24px;color:#fff;font-size:32px;font-weight:bold;cursor:pointer;line-height:1;">&times;</span>
+<img id="lightbox-img" src="" style="max-width:90%;max-height:90%;border:2px solid #000;">
+</div>
+</td></tr>
 <script>
 document.getElementById('tags').addEventListener('change', function() {{
   var selected = this.value;
