@@ -24,6 +24,20 @@
       "title": "Goosling walking around",
       "date": "2023-07-14",
       "tags": ["Birds", "Nature"]
+    },
+    {
+      "src": "images/Song_Sparrow_1.jpg",
+      "caption": "A Song Sparrow sitting on a branch",
+      "title": "Song Sparrow on a Branch",
+      "date": "2026-05-22",
+      "tags": ["Birds", "Nature"]
+    },
+    {
+      "src": "images/Female_Mallard_1.jpg",
+      "caption": "A female mallard swimming in the water",
+      "title": "Mallard Swimming",
+      "date": "2026-06-07",
+      "tags": ["Birds", "Nature"]
     }
   ]
 }
